@@ -8,8 +8,8 @@ class NotesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // get screen width
     final screenWidth = MediaQuery.of(context).size.width;
-
     final fontSize = screenWidth / 20;
+
     return Column(
       children: [
         // title : My Notes
@@ -18,7 +18,7 @@ class NotesScreen extends StatelessWidget {
           children: [
             Text(
               'My Notes',
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.inter(
                 fontSize: fontSize * 1.75,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,

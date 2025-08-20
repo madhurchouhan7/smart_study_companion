@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:smart_study_companion/notes/screens/detailed_notes.dart';
 import 'package:smart_study_companion/notes/screens/notes_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,7 +37,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-
         title: Text('Hello, Madhur', style: GoogleFonts.poppins()),
         actions: [
           // menu button
@@ -59,6 +59,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      // Floating Action Button - only show on Notes tab (index 0)
+      floatingActionButton: selectedIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DetailedNotes()),
+                );
+              },
+              tooltip: 'Add New Note',
+              child: Icon(FontAwesomeIcons.plus),
+            )
+          : null, // Hide FAB on other tabs
       bottomNavigationBar: GNav(
         style: GnavStyle.google,
         onTabChange: (value) => onItemTapped(value),
@@ -70,25 +83,21 @@ class _HomePageState extends State<HomePage> {
         tabActiveBorder: Border.all(color: Colors.white, width: 2),
         tabs: [
           GButton(
-            onPressed: () => onItemTapped(0),
             icon: FontAwesomeIcons.noteSticky,
             iconColor: Colors.grey,
             iconActiveColor: Colors.white,
           ),
           GButton(
-            onPressed: () => onItemTapped(1),
             icon: FontAwesomeIcons.circleCheck,
             iconColor: Colors.grey,
             iconActiveColor: Colors.white,
           ),
           GButton(
-            onPressed: () => onItemTapped(2),
             icon: FontAwesomeIcons.book,
             iconColor: Colors.grey,
             iconActiveColor: Colors.white,
           ),
           GButton(
-            onPressed: () => onItemTapped(3),
             icon: FontAwesomeIcons.userAstronaut,
             iconColor: Colors.grey,
             iconActiveColor: Colors.white,

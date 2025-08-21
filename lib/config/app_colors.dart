@@ -26,4 +26,15 @@ class AppColors {
   static const Color errorColor = Color(0xFFEF4444);
   // warning
   static const Color warningColor = Color(0xFFF59E0B);
+
+  // light and soft pastel colors
+  static const Color babyPink = Color(0xFFFDDDE6);
+  static const Color lightCoral = Color(0xFFF08080);
+  static const Color softLavender = Color(0xFFE6E6FA);
+  static const Color powderBlue = Color(0xFFB0E0E6);
+  static const Color mintGreen = Color(0xFF98FB98);
+  static const Color sageGreen = Color(0xFFB2AC88);
+  static const Color pastelYellow = Color(0xFFFDFD96);
+  static const Color cream = Color(0xFFFFFDD0);
+  static const Color lightPeach = Color(0xFFFDD8B9);
 }

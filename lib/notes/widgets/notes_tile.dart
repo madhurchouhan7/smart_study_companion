@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_study_companion/config/app_colors.dart';
 import 'package:smart_study_companion/notes/screens/detailed_notes.dart';
 import 'package:smart_study_companion/notes/model/note.dart';
 
@@ -24,7 +25,7 @@ class NotesTile extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.lightBlue,
+          color: Colors.blueGrey.shade100,
           borderRadius: BorderRadius.circular(16),
         ),
         width: screenWidth / 2.1,

@@ -6,12 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_study_companion/notes/controller/detailed_notes_controller.dart';
 
 class DetailedNotes extends StatelessWidget {
-  DetailedNotes({super.key});
-
-  final controller = Get.put(DetailedNotesController());
+  const DetailedNotes({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Delete any existing controller to ensure fresh state
+    try {
+      Get.delete<DetailedNotesController>();
+    } catch (e) {
+      // Controller doesn't exist, which is fine
+    }
+
+    // Create a fresh controller
+    final controller = Get.put(DetailedNotesController());
     final screenWidth = MediaQuery.of(context).size.width;
     final fontSize = screenWidth / 20;
 
@@ -29,9 +36,13 @@ class DetailedNotes extends StatelessWidget {
             },
           ),
         ),
+
+        actionsPadding: EdgeInsets.only(right: 16),
         actions: [
-          Obx(
-            () => controller.isEditing.value
+          // Delete button - only show when editing
+          Obx(() {
+            print('isEditing: ${controller.isEditing.value}'); // Debug print
+            return controller.isEditing.value
                 ? Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -44,8 +55,8 @@ class DetailedNotes extends StatelessWidget {
                       },
                     ),
                   )
-                : SizedBox.shrink(),
-          ),
+                : SizedBox.shrink();
+          }),
 
           SizedBox(width: 12),
 
@@ -68,8 +79,10 @@ class DetailedNotes extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              textCapitalization: TextCapitalization.sentences,
               controller: controller.titleController,
-              autofocus: true, // Only autofocus for new notes
+              autofocus:
+                  !controller.isEditing.value, // Don't autofocus when editing
               keyboardType: TextInputType.multiline,
               textInputAction: TextInputAction.done,
               maxLines: null,
@@ -117,7 +130,11 @@ class DetailedNotes extends StatelessWidget {
             Expanded(
               child: QuillEditor.basic(
                 controller: controller.quillController,
-                config: const QuillEditorConfig(autoFocus: false),
+                config: const QuillEditorConfig(
+                  autoFocus: false,
+
+                  placeholder: 'Start writing your note here...',
+                ),
               ),
             ),
           ],

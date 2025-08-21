@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
       ],
       title: 'Smart Study App',
       theme: ThemeData(
+        useMaterial3: true,
         colorScheme: ColorScheme.light(
           primary: AppColors.primaryColor,
           secondary: AppColors.secondaryColor,

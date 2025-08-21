@@ -20,10 +20,16 @@ class DetailedNotesController extends GetxController {
     super.onInit();
     final args = Get.arguments;
 
+    print('DetailedNotesController onInit - args: $args'); // Debug print
+
     if (args != null && args['isEditing'] == true) {
       isEditing.value = true;
       existingNote = args['note'] as Note;
       noteIndex = args['index'] as int;
+
+      print(
+        'Setting up editing mode - noteIndex: $noteIndex, note: ${existingNote?.title}',
+      ); // Debug print
 
       titleController.text = existingNote!.title ?? '';
 
@@ -40,23 +46,32 @@ class DetailedNotesController extends GetxController {
           quillController.document.insert(0, content);
         }
       } catch (e) {
+        print('Error parsing content: $e'); // Debug print
         quillController.document.insert(0, existingNote!.contentJson);
       }
+    } else {
+      print('Creating new note mode'); // Debug print
+      isEditing.value = false;
     }
+
+    print('Final isEditing value: ${isEditing.value}'); // Debug print
   }
 
   void saveNote(BuildContext context) {
     final title = titleController.text.trim();
-    final contentJson = quillController.document.toPlainText();
+    // Save as Quill Delta JSON to preserve rich text formatting
+    final deltaJson = quillController.document.toDelta().toJson();
+    final contentJson = jsonEncode(deltaJson);
 
-    if (title.isEmpty && contentJson.trim().isEmpty) return;
+    if (title.isEmpty && quillController.document.toPlainText().trim().isEmpty)
+      return;
 
     final notesController = Get.find<NotesController>();
 
     if (isEditing.value && noteIndex != null) {
       final updatedNote = Note(
         title: title.isEmpty ? "Untitled Note" : title,
-        contentJson: contentJson,
+        contentJson: contentJson, // Save as JSON delta
         dateCreated: existingNote!.dateCreated,
         dateModified: DateTime.now(),
       );
@@ -64,7 +79,7 @@ class DetailedNotesController extends GetxController {
     } else {
       final note = Note(
         title: title.isEmpty ? "Untitled Note" : title,
-        contentJson: contentJson,
+        contentJson: contentJson, // Save as JSON delta
         dateCreated: DateTime.now(),
         dateModified: DateTime.now(),
       );
@@ -74,7 +89,11 @@ class DetailedNotesController extends GetxController {
     Get.back(); // navigate back
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Note Created successfully'),
+        content: Text(
+          isEditing.value
+              ? 'Note updated successfully'
+              : 'Note created successfully',
+        ),
         behavior: SnackBarBehavior.floating,
         duration: Duration(seconds: 2),
       ),
@@ -93,5 +112,12 @@ class DetailedNotesController extends GetxController {
         ),
       );
     }
+  }
+
+  @override
+  void onClose() {
+    titleController.dispose();
+    quillController.dispose();
+    super.onClose();
   }
 }

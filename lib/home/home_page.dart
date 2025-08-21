@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+// TODO: Add GetX State Management instead of Stateful
 class _HomePageState extends State<HomePage> {
   // selected index
   int selectedIndex = 0;
@@ -52,12 +53,7 @@ class _HomePageState extends State<HomePage> {
         leading: Icon(FontAwesomeIcons.user),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [Center(child: pages.elementAt(selectedIndex))],
-          ),
-        ),
+        child: pages.elementAt(selectedIndex),
       ),
       // Floating Action Button - only show on Notes tab (index 0)
       floatingActionButton: selectedIndex == 0
@@ -72,37 +68,44 @@ class _HomePageState extends State<HomePage> {
               child: Icon(FontAwesomeIcons.plus),
             )
           : null, // Hide FAB on other tabs
-      bottomNavigationBar: GNav(
-        style: GnavStyle.google,
-        onTabChange: (value) => onItemTapped(value),
-        curve: Curves.easeInOut,
-        selectedIndex: selectedIndex,
-        activeColor: Colors.white,
-        backgroundColor: Colors.black,
-        tabMargin: EdgeInsetsGeometry.all(5),
-        tabActiveBorder: Border.all(color: Colors.white, width: 2),
-        tabs: [
-          GButton(
-            icon: FontAwesomeIcons.noteSticky,
-            iconColor: Colors.grey,
-            iconActiveColor: Colors.white,
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: GNav(
+            style: GnavStyle.google,
+            onTabChange: (value) => onItemTapped(value),
+            curve: Curves.easeInOut,
+            selectedIndex: selectedIndex,
+            activeColor: Colors.white,
+            backgroundColor: Colors.black,
+            tabMargin: EdgeInsetsGeometry.all(5),
+            tabActiveBorder: Border.all(color: Colors.white, width: 2),
+            tabs: [
+              GButton(
+                icon: FontAwesomeIcons.noteSticky,
+                iconColor: Colors.grey,
+                iconActiveColor: Colors.white,
+              ),
+              GButton(
+                icon: FontAwesomeIcons.circleCheck,
+                iconColor: Colors.grey,
+                iconActiveColor: Colors.white,
+              ),
+              GButton(
+                icon: FontAwesomeIcons.book,
+                iconColor: Colors.grey,
+                iconActiveColor: Colors.white,
+              ),
+              GButton(
+                icon: FontAwesomeIcons.userAstronaut,
+                iconColor: Colors.grey,
+                iconActiveColor: Colors.white,
+              ),
+            ],
           ),
-          GButton(
-            icon: FontAwesomeIcons.circleCheck,
-            iconColor: Colors.grey,
-            iconActiveColor: Colors.white,
-          ),
-          GButton(
-            icon: FontAwesomeIcons.book,
-            iconColor: Colors.grey,
-            iconActiveColor: Colors.white,
-          ),
-          GButton(
-            icon: FontAwesomeIcons.userAstronaut,
-            iconColor: Colors.grey,
-            iconActiveColor: Colors.white,
-          ),
-        ],
+        ),
       ),
     );
   }

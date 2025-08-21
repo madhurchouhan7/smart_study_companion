@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_study_companion/notes/controller/detailed_notes_controller.dart';
@@ -16,26 +17,49 @@ class DetailedNotes extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Get.back(),
+        leading: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.grey[300],
+          ),
+          child: IconButton(
+            icon: FaIcon(FontAwesomeIcons.arrowLeft),
+            onPressed: () {
+              Get.back();
+            },
+          ),
         ),
         actions: [
           Obx(
             () => controller.isEditing.value
-                ? IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      controller.deleteNote(context);
-                    },
+                ? Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey[300],
+                    ),
+                    child: IconButton(
+                      icon: FaIcon(FontAwesomeIcons.trash),
+                      onPressed: () {
+                        controller.deleteNote(context);
+                      },
+                    ),
                   )
                 : SizedBox.shrink(),
           ),
-          IconButton(
-            icon: Icon(Icons.save),
-            onPressed: () {
-              controller.saveNote(context);
-            },
+
+          SizedBox(width: 12),
+
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[300],
+            ),
+            child: IconButton(
+              icon: FaIcon(FontAwesomeIcons.save),
+              onPressed: () {
+                controller.saveNote(context);
+              },
+            ),
           ),
         ],
       ),

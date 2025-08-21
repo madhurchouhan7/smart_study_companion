@@ -41,11 +41,15 @@ class _HomePageState extends State<HomePage> {
         title: Text('Hello, Madhur', style: GoogleFonts.poppins()),
         actions: [
           // menu button
-          IconButton(
-            icon: FaIcon(FontAwesomeIcons.bars),
-            onPressed: () {
-              // Handle menu button press
-            },
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[300],
+            ),
+            child: IconButton(
+              icon: FaIcon(FontAwesomeIcons.bars),
+              onPressed: () {},
+            ),
           ),
         ],
 
@@ -71,12 +75,12 @@ class _HomePageState extends State<HomePage> {
           : null, // Hide FAB on other tabs
       // given container because to round the corners of the bottom navigation bar
       bottomNavigationBar: Container(
-        margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        margin: EdgeInsets.only(bottom: 24, left: 10, right: 10),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(26)),
 
         // ClipRRect is used to round the corners of the bottom navigation bar
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(26),
           child: GNav(
             style: GnavStyle.google,
             onTabChange: (value) => onItemTapped(value),

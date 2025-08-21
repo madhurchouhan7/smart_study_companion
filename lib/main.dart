@@ -13,8 +13,10 @@ void main() async {
 
   await Hive.initFlutter();
 
+  // Register the Note adapter for Hive
   Hive.registerAdapter(NoteAdapter());
 
+  // Open the Hive box for notes
   await Hive.openBox<Note>('notesBox');
   runApp(MyApp());
 }

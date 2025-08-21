@@ -12,6 +12,10 @@ class NotesScreen extends StatelessWidget {
     // get screen width
     final screenWidth = MediaQuery.of(context).size.width;
     final fontSize = screenWidth / 20;
+
+    // depedency injection for NotesController
+    // This will ensure that the controller is available throughout the app
+
     final notesController = Get.put<NotesController>(NotesController());
 
     return Padding(

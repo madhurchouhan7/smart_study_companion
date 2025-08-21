@@ -3,9 +3,11 @@ import 'package:hive/hive.dart';
 import 'package:smart_study_companion/notes/model/note.dart';
 
 class NotesController extends GetxController {
+  // Observable list to hold notes
   var notes = <Note>[].obs;
   var isLoading = true.obs;
 
+  // creating a Hive box to store notes
   Box<Note> notesBox = Hive.box<Note>('notesBox');
 
   @override
@@ -36,16 +38,17 @@ class NotesController extends GetxController {
     }
   }
 
+  // add note
   Future<void> addNote(Note note) async {
     try {
       await notesBox.add(note);
-      print("Note added: ${note.title}");
       fetchNotes();
     } catch (e) {
       print('Error adding note: $e');
     }
   }
 
+  // update note
   Future<void> updateNote(int index, Note updatedNote) async {
     try {
       await notesBox.putAt(index, updatedNote);
@@ -55,6 +58,7 @@ class NotesController extends GetxController {
     }
   }
 
+  // delete note
   Future<void> deleteNote(int index) async {
     try {
       if (index >= 0 && index < notesBox.length) {

@@ -53,9 +53,10 @@ class _HomePageState extends State<HomePage> {
         leading: Icon(FontAwesomeIcons.user),
       ),
       body: SafeArea(
+        // load the pages based on selected index
         child: pages.elementAt(selectedIndex),
       ),
-      // Floating Action Button - only show on Notes tab (index 0)
+      // Floating Action Button - only show on Notes tab (index 0), otherwise show nothing
       floatingActionButton: selectedIndex == 0
           ? FloatingActionButton(
               onPressed: () {
@@ -68,9 +69,12 @@ class _HomePageState extends State<HomePage> {
               child: Icon(FontAwesomeIcons.plus),
             )
           : null, // Hide FAB on other tabs
+      // given container because to round the corners of the bottom navigation bar
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+
+        // ClipRRect is used to round the corners of the bottom navigation bar
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: GNav(

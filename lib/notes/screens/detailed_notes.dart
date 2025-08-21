@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailedNotes extends StatefulWidget {
-  DetailedNotes({super.key});
+  const DetailedNotes({super.key});
 
   @override
   State<DetailedNotes> createState() => _DetailedNotesState();
@@ -71,6 +71,7 @@ class _DetailedNotesState extends State<DetailedNotes> {
             children: [
               // title for note
               TextFormField(
+                autofocus: true,
                 keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.done,
                 maxLines: null,
@@ -92,27 +93,35 @@ class _DetailedNotesState extends State<DetailedNotes> {
 
               QuillSimpleToolbar(
                 controller: _controller,
-
                 config: const QuillSimpleToolbarConfig(
                   showAlignmentButtons: false,
                   showBackgroundColorButton: false,
-                  showCodeBlock: true,
+                  showCodeBlock: false,
                   showHeaderStyle: false,
                   showIndent: false,
-                  showListBullets: false,
-                  showListCheck: false,
                   showListNumbers: false,
                   showLink: false,
                   showSubscript: false,
                   showSuperscript: false,
                   showUndo: false,
                   showRedo: false,
+                  showSearchButton: false,
+                  showFontFamily: false,
+                  showColorButton: false,
+                  showStrikeThrough: false,
+                  showDividers: false,
+                  showQuote: false,
+                  showInlineCode: false,
                 ),
               ),
               Expanded(
                 child: QuillEditor.basic(
+                  focusNode: FocusNode(),
                   controller: _controller,
-                  config: const QuillEditorConfig(),
+                  config: const QuillEditorConfig(
+                    autoFocus: false,
+                    placeholder: 'Start writing your note here...',
+                  ),
                 ),
               ),
             ],

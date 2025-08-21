@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         selectedIndex: selectedIndex,
         activeColor: Colors.white,
         backgroundColor: Colors.black,
-        tabMargin: EdgeInsetsGeometry.all(15),
+        tabMargin: EdgeInsetsGeometry.all(5),
         tabActiveBorder: Border.all(color: Colors.white, width: 2),
         tabs: [
           GButton(

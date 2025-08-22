@@ -46,7 +46,7 @@ class NotesScreen extends StatelessWidget {
               if (notesController.notes.isEmpty) {
                 return Center(
                   child: Text(
-                    'No notes yet. Tap + to create your first note!',
+                    'No notes yet. \nTap + to create your first note!',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
                       fontSize: fontSize,

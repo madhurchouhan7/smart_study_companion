@@ -14,6 +14,7 @@ class NotesTile extends StatelessWidget {
   Widget build(BuildContext context) {
     // get screen width
     final screenWidth = MediaQuery.of(context).size.width;
+    final fontSize = screenWidth / 20;
     return InkWell(
       onTap: () {
         // Handle note tap - pass the entire note object and index for editing
@@ -39,16 +40,16 @@ class NotesTile extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: fontSize * 1.1,
               ),
             ),
 
-            SizedBox(height: 8),
+            SizedBox(height: 12),
             // content
             Flexible(
               child: Text(
                 note.contentJson.toString(),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 maxLines: 6,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.poppins(fontSize: 14),

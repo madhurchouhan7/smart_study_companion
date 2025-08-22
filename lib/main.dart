@@ -7,6 +7,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:smart_study_companion/notes/model/note.dart';
+import 'package:smart_study_companion/todo/model/todo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,10 @@ void main() async {
 
   // Open the Hive box for notes
   await Hive.openBox<Note>('notesBox');
+
+  Hive.registerAdapter(TodoAdapter());
+  await Hive.openBox<Todo>('todosBox');
+
   runApp(MyApp());
 }
 

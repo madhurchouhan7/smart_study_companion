@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_study_companion/notes/screens/detailed_notes.dart';
 import 'package:smart_study_companion/notes/screens/notes_screen.dart';
+import 'package:smart_study_companion/todo/screens/todo_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> pages = const <Widget>[
     // later replace the text with whole screen for individual pages
     NotesScreen(),
-    Text('Tasks'),
+    TodoScreen(),
     Text('Book'),
     Text('Profile'),
   ];

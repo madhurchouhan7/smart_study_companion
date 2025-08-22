@@ -91,8 +91,8 @@ class DetailedNotesController extends GetxController {
       SnackBar(
         content: Text(
           isEditing.value
-              ? 'Note updated successfully'
-              : 'Note created successfully',
+              ? 'Note updated successfully ✅'
+              : 'Note created successfully ✅',
         ),
         behavior: SnackBarBehavior.floating,
         duration: Duration(seconds: 2),
@@ -106,7 +106,7 @@ class DetailedNotesController extends GetxController {
       Get.back();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Note deleted successfully'),
+          content: Text('Note deleted successfully 🗑️'),
           behavior: SnackBarBehavior.floating,
           duration: Duration(seconds: 2),
         ),
